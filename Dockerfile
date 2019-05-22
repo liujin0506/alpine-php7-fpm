@@ -1,4 +1,4 @@
-FROM liujin0506/alpine-php7:1.0
+FROM liujin0506/alpine-php7:1.1
 
 MAINTAINER liujing <liujing@addnewer.com>
 
@@ -28,15 +28,16 @@ RUN apk update \
 RUN mkdir -p /usr/share/nginx/html
 RUN mkdir -p /usr/local/var/log/php7
 RUN mkdir -p /usr/local/var/run
+RUN mkdir -p /data/www
 
 COPY ./php-fpm.conf /etc/php7/
 
 COPY ./www.conf /etc/php7/php-fpm.d/
 
 # Expose volumes
-VOLUME ["/usr/share/nginx/html", "/usr/local/var/log/php7", "/var/run/"]
+VOLUME ["/usr/share/nginx/html", "/usr/local/var/log/php7", "/var/run/", "/data/www"]
 
-WORKDIR /usr/share/nginx/html
+WORKDIR /data/www
 
 EXPOSE 9000
 
